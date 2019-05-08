@@ -24,16 +24,17 @@ namespace _001___OOPS_Review
             //if you  create a declaritive using JUST the class name then this is ONLY a "pointer"
                 //a "pointer" can only hold a instance of the class specified.
             //Therefore the value of aVariable is NULL
-            myData aVariable;
+            FencePanel aVariable;
 
             //if you  use the new command with the class, 
             //the new command will physically create a new instance of the class.
-            myData anInstance = new myData();
+            FencePanel aVariable = new FencePanel();
             if(aVariable == null)
             {
                 Console.WriteLine("aVariable has nothing in it");
 
             }
+            FencePanel anInstance = new FencePanel();
             if (anInstance == null)
             {
                 Console.WriteLine("anInstance has nothing in it");
