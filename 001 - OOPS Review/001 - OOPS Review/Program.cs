@@ -28,13 +28,12 @@ namespace _001___OOPS_Review
 
             //if you  use the new command with the class, 
             //the new command will physically create a new instance of the class.
-            FencePanel aVariable = new FencePanel();
+            FencePanel anInstance = new FencePanel();
             if(aVariable == null)
             {
                 Console.WriteLine("aVariable has nothing in it");
 
             }
-            FencePanel anInstance = new FencePanel();
             if (anInstance == null)
             {
                 Console.WriteLine("anInstance has nothing in it");
