@@ -28,17 +28,23 @@ namespace _001___OOPS_Review
 
             //if you  use the new command with the class, 
             //the new command will physically create a new instance of the class.
+
+            //when this statement is executed the default constructor of the fencepanel class will be called on your behalf
             FencePanel anInstance = new FencePanel();
-            if(aVariable == null)
-            {
-                Console.WriteLine("aVariable has nothing in it");
+            anInstance.Height = 5.8;
+            anInstance.Width = 8.0;
+            anInstance.Style = "neighbour friendly";
+            Console.WriteLine("height is: " + anInstance.Height.ToString());
+            Console.WriteLine("height is: " + anInstance.Width.ToString());
+            Console.WriteLine("height is: " + anInstance.Style.ToString());
+            Console.WriteLine("height is: " + anInstance.Price.ToString() + "\n");
 
-            }
-            if (anInstance == null)
-            {
-                Console.WriteLine("anInstance has nothing in it");
 
-            }
+            FencePanel anGInstance = new FencePanel(4.0, 6.8, "private", 32.89);
+            Console.WriteLine("height is: " + anGInstance.Height.ToString());
+            Console.WriteLine("height is: " + anGInstance.Width.ToString());
+            Console.WriteLine("height is: " + anGInstance.Style.ToString());
+            Console.WriteLine("height is: " + anGInstance.Price.ToString() + "\n");
 
 
 
