@@ -13,7 +13,7 @@ namespace _001___OOPS_Review
     // For a class to hold data. DO NOT make it static.
         //Unless you want everyone have access to that data (read/change)
 
-    class FencePanel
+    public class FencePanel
     {
         //PROPERTIES
         
@@ -98,11 +98,10 @@ namespace _001___OOPS_Review
         }
 
         //Behaviour (method)
-        public double EstimatedNumberOfPanels(double linearlength, double gatewidth, int numberofgates)
+        public double EstimatedNumberOfPanels(double linearlength)
         {
-            double totalgatewidth = gatewidth * numberofgates;
-            double fenceWidth = linearlength - totalgatewidth;
-            double numberofpanels = fenceWidth / Width;
+
+            double numberofpanels = linearlength / Width;
             return numberofpanels;
         }
 
