@@ -16,8 +16,8 @@ namespace _001___OOPS_Review
             //static classes are used by everyone (not private)
             //methods of a static class will be placed after the object operator
             // the "dot" operator
-            Console.ReadLine();
-            Console.WriteLine("test");
+            //Console.ReadLine();
+            //Console.WriteLine("test");
 
 
             //create an instance of a none static class
@@ -47,11 +47,12 @@ namespace _001___OOPS_Review
             Console.WriteLine("height is: " + anGInstance.Price.ToString() + "\n");
 
             //Using instances of classes
+            Console.WriteLine("\n Entering Gate data \n");
 
             FenceEstimate CustomerFence = new FenceEstimate();
             //placing data from the right side to the left side 
             CustomerFence.Fence = anGInstance;
-            CustomerFence.Gates = null;
+            CustomerFence.Gates = new List<Gate>();
 
 
             string menuItem = "0";

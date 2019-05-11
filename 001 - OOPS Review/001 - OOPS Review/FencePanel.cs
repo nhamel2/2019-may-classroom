@@ -6,55 +6,65 @@ using System.Threading.Tasks;
 
 namespace _001___OOPS_Review
 {
-    //the default acces permissions is private
-    //If an outside user of this class wanted access to the class contents;
-        //Then the access permissions must be public
-    //If this class was static, thhe class would not hold data
-    // For a class to hold data. DO NOT make it static.
-        //Unless you want everyone have access to that data (read/change)
-
+    //the default access permissions is private
+    //if an outside user of this class wanted
+    //     access to the class contents; then
+    //     the access permissions needs to be public
+    //if this class was static; the class would not
+    //     hold data
+    //For a class to hold data, DO NOT make it static
+    //     unless you want everyone to have access
+    //     to that data (read and change)
     public class FencePanel
     {
-        //PROPERTIES
-        
-        //a property is accosiated with a single piece of data
+        //Properties
+        //a property is associated with a single piece of
+        //    data
         //a property has two sub components:
-            //get: returns a value to the calling client
-            //set: recieves a value from the caling client
-                //the key word used to represent incoming data is "value"
-        //a property does not take in a parameter
-        
-        //there are two ways to code a property:
-            //fully-implemented: the property will have a private data memember to hold the actual data
-                //usually this codig form is used when additional logic/criteria is associated with tht data value
-            //auto-implemented: the property does not need a private data member to hold the acutal data
-                //the data stoage will be managed by the system
-            //Since the property will be doing some actions against the data, you must supply a storage area
-                //This storage area is refered to as a private data member
+        //     get: returns a value to the calling client
+        //     set: receives a value from the calling client
+        //          the keyword use to represent incoming data
+        //              is value
+        //a property DOES NOT take in a parameter
 
-        //auto-implemented property
+        //there are two ways to code a property: Fully Implemented and Auto-Implemented
+
+        //Auto-Implemented Property: the property does not need
+        //     a private data member to hold the actual data.
+        //     The data storage will be managed by the system.
         public double Height { get; set; }
         public double Width { get; set; }
+
+        //Fully Implemented Property: The property will have a
+        //     a private data member to hold the actual data.
+        //     Usually, this coding form is used when additional
+        //     logic/criteria is associated with the data value.
+        //     Since, the property will be doing some actions 
+        //     against the data, you MUST supply a storage area.
+        //     This storage area is referred to as a private
+        //     data member
 
         //Private data member
         private string _Style;
 
-        //fully-implemented property
+        //Fully Implemented Property
         public string Style
         {
             get
             {
-                return Style;
+                return _Style;
             }
             set
             {
-                //value contains the incoming data to the property
-                    //the contents of value needs to be stored
-                //CRITERIA: DO NOT store an empty string
-                    //store either null or the characters in the string
-                if(string.IsNullOrEmpty(value))
+
+                //value contains the incomming data to the property
+                //the contents of value needs to be stored
+                //creteria: DO NOT store an empty string
+                //          Store either null or the characters in the
+                //           string
+                if (string.IsNullOrEmpty(value))
                 {
-                    _Style = null; 
+                    _Style = null;
                 }
                 else
                 {
@@ -63,33 +73,41 @@ namespace _001___OOPS_Review
             }
         }
 
-        //a nullable numeric (xx?) will contain either a null or a number
-            //therefore nullable numberics do not need to be full implemented UNLESS you have additional criteria to include
+        //a nullable numeric (xxx?) will content either a null or
+        //     a number
+        //therefore nullable numerics DO NOT need to be fully 
+        //     implement UNLESS you have additional criteria to 
+        //     cover
         public double? Price { get; set; }
 
-        //CONSTRUCTOR(S)
-        //Constructors are executed for the client caller during the execution of the "new" command
-            //the client caller DOES NOT call a constructor directly
-            //if no constructoes are coded in a class definition, 
-                //then the data stored within the class definition is set to the system defaults (string:null, int/double: 0 etc...)
-            //if one codes a constructor within the class definition, then the coder is responsible for ALL constructors
-            //syntax ----->         public   classname(list of parameters)   { code }
+        //Constructors
+        //Constructor(s) are executed for the client caller during
+        //    the execution of the "new" command
+        //the client caller DOES NOT call a constructor directly
+        //if no constructors ae coded in a class definition, then
+        //     the data storage within the class definition is set
+        //     to the system defaults (string -> null, numerics -> 0
+        //     bool -> false, ...)
+        //if one codes a constructor within the class definitin
+        //     then the coder is responsible for ALL constructors
+        //syntax   public classname(list of parameters) { code }
 
-        //there are two generally create constructors
-            //default: simulates the system default initializing of your data storage items using their datatype
-            //greddy: this has a parameter list of all the data storage items defined within the class definiation 
+        //there are two generally create constructor 
+        //Default: simulates the System default initialization of
+        //         your data storage items using their datatype
+        //Greedy: this has a parameter list of all data storage
+        //        items defined within the class definition
 
-        
         //Default
         public FencePanel()
         {
-
+            //optionally you may wish to have your own default
+            //    values for your data storage items
         }
-        //optionally you may want to have your own default values for your data storage items
 
-
-        //Greddy
-        public FencePanel(double height, double width, string style, double? price)
+        //Greedy
+        public FencePanel(double height, double width,
+                            string style, double? price)
         {
             Height = height;
             Width = width;
@@ -104,6 +122,5 @@ namespace _001___OOPS_Review
             double numberofpanels = linearlength / Width;
             return numberofpanels;
         }
-
-    }   
+    }
 }
