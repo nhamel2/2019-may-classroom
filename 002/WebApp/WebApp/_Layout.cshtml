@@ -1,0 +1,12 @@
+﻿<!DOCTYPE html>
+<html>@*The "@" indicate links to content. These content links make this page "dynamic"*@
+<head>
+    <meta name="author" content="Nicholas Hamel" />
+    <meta name="description" content="Razor basics and examples"/>
+    <title>@Page.Title</title>  @*the dot operator indicates c# code ("page" object, "title" method)*@
+    @RenderSection("head", required: false)
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>
