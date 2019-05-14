@@ -4,9 +4,23 @@
     <meta name="author" content="Nicholas Hamel" />
     <meta name="description" content="Razor basics and examples"/>
     <title>@Page.Title</title>  @*the dot operator indicates c# code ("page" object, "title" method)*@
+    @*link order matters*@
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
     @RenderSection("head", required: false)
 </head>
 <body>
-    @RenderBody()
+    <div class="container-fluid">
+        <div class="jumbotron">
+            @RenderSection("banner", required: true)
+        </div>
+        @RenderBody()
+        <hr stlye="5px; color: black;" />
+        @RenderSection("footer", required: false)
+        <br />
+        &copy; CPSC1517 Nait Learning Material, @DateTime.Today.ToShortDateString();
+    </div>
+   
 </body>
 </html>
