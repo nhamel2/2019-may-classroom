@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "~/_Layout.cshtml";
+    Page.Title = "TextBoxes";
+
+    //retrieve the data from the form controls
+    //the form controls can be accessed via the Request object
+    //the Request object has several collections
+    //Form controls are found in the .Form collection
+    //a particular control is referenced by it's name in the Form Collection
+    //syntax  Request.Form["namestring"]
+    //GENERALLY ALL data from controls are strings
+    var leftdata = Request.Form["controlleft"];     //retrieve the control contents
+    var rightdata = Request.Form["controlright"];   //retrieve the control contents
+    var thebutton = Request.Form["formbutton"];     //retrieve the control contents
+    var results = "";  //page local variable
+
+}
+
+@section banner{
+    <h1>TextBoxes</h1>
+}
+
+@if (IsPost)
+{
+    <p>You press the @thebutton button</p>
+
+    if (thebutton.Equals("Left"))
+    {
+        results = leftdata;
+    }
+    else
+    {
+        results = rightdata;
+    }
+}
+
+<form id="theForm" method="post">
+    <div class="row">
+        <div class="col-md-offset-4">
+            <label id="Concerns" for="Results">Results:</label>
+            <input type="text" id="Results" name="Results"
+                   readonly="readonly"  value="@results" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="controlleft" id="lefttitle">Left Side:</label>
+            <input type="text" id="controlleft" name="controlleft"
+                   placeholder="enter some data" value="@leftdata" />
+            <br />
+            <input type="submit" id="formbutton" name="formbutton"
+                   class="btn" value="Left" />
+        </div>
+        <div class="col-md-6">
+            <label for="controlright" id="righttitle">Right Side:</label>
+            <input type="text" id="controlright" name="controlright"
+                   placeholder="enter some data" value="@rightdata"/>
+            <br />
+            <input type="submit" id="formbutton" name="formbutton"
+                   class="btn" value="Right" />
+        </div>
+    </div>
+</form>
+
+
+

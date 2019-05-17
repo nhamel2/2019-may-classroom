@@ -1,0 +1,27 @@
+﻿<div class="navbar navbar-default navbar-fixed-top">
+    <!-- the next div sets up the branding title-->
+    <div class="navbar-header">
+        <a class="navbar-brand" style="font-size:x-large">
+            <strong>Razor Samples</strong>
+        </a>
+    </div>
+    <!-- menu items area-->
+    <ul class="nav navbar-nav">
+        <!-- root menu item-->
+        <li> <a href="@Href("~/index.cshtml")">Home</a></li>
+        <!-- submenu (drop down menu)-->
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Controls <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li> <a href="@Href("~/SamplePages/TextBoxes.cshtml")">TextBoxes</a></li>
+                <li> <a href="@Href("~/SamplePages/RadioButtons.cshtml")">RadioButtons</a></li>
+                <li> <a href="@Href("~/SamplePages/CheckBoxes.cshtml")">CheckBoxes</a></li>
+                <li> <a href="@Href("~/SamplePages/DropDownList.cshtml")">Dropdowns</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+
