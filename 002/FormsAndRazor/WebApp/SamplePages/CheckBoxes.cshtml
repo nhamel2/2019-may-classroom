@@ -1,10 +1,30 @@
 ﻿@{
     Layout = "~/_Layout.cshtml";
     Page.Title = "CheckBoxes";
+    var choice = "";
 }
 
 @section banner{
     <h1>CheckBoxes</h1>
 }
 
+    <form id="thform" method="post">
+        <div class="row">
+            <div class="col-sm-offest-1">
+                <label id="CheckBoxGrouplabel" for="CheckBoxGroup">
+                    Select your favourite gaming platform
+                </label>
+                <input type="checkbox" id="CheckBoxGroup" value="PS4" @(Array.IndexOf(choice.Split(','), "PS4") >= 0 ? "check" : "") />
+                <input type="checkbox" id="CheckBoxGroup" value="Phone" @(Array.IndexOf(choice.Split(','), "PS4") >= 0 ? "check" : "") />
+                <input type="checkbox" id="CheckBoxGroup" value="NDS" @(Array.IndexOf(choice.Split(','), "PS4") >= 0 ? "check" : "") />
+                <input type="checkbox" id="CheckBoxGroup" value="PS4" @(Array.IndexOf(choice.Split(','), "PS4") >= 0 ? "check" : "") />
 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-offset-1">
+                <input type="submit" class="btn btn-primary" id="formButtom" name="formButton" value="submit" />
+            </div>
+        </div>
+
+    </form>
