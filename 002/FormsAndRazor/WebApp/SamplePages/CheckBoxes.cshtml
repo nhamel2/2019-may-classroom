@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "~/_Layout.cshtml";
     Page.Title = "CheckBoxes";
+
     var choice = "";
 }
 
@@ -8,23 +9,50 @@
     <h1>CheckBoxes</h1>
 }
 
-    <form id="thform" method="post">
-        <div class="row">
-            <div class="col-sm-offest-1">
-                <label id="CheckBoxGrouplabel" for="CheckBoxGroup">
-                    Select your favourite gaming platform
-                </label>
-                <input type="checkbox" id="CheckBoxGroup" value="PS4" @(Array.IndexOf(choice.Split(','), "PS4") >= 0 ? "check" : "") />
-                <input type="checkbox" id="CheckBoxGroup" value="Phone" @(Array.IndexOf(choice.Split(','), "PS4") >= 0 ? "check" : "") />
-                <input type="checkbox" id="CheckBoxGroup" value="NDS" @(Array.IndexOf(choice.Split(','), "PS4") >= 0 ? "check" : "") />
-                <input type="checkbox" id="CheckBoxGroup" value="PS4" @(Array.IndexOf(choice.Split(','), "PS4") >= 0 ? "check" : "") />
-
-            </div>
+@if (IsPost)
+{
+    //this example demonstrates that you can delay retrieving your form data
+    //    to a time when you really need to have it
+    choice = Request.Form["CheckBoxGroup"];
+    if (string.IsNullOrEmpty(choice))
+    {
+        <p><span style="color:firebrick">Make selections from the platform choices.</span></p>
+        choice = "";
+    }
+    else
+    {
+        <p>
+            I see you like to use the following platforms:
+            <ul>
+                @foreach(var platform in choice.Split(','))
+                {
+                    <li>@platform</li>
+                }
+            </ul>
+        </p>
+    }
+}
+<form id="theform" method="post">
+    <div class="row">
+        <div class="col-sm-offset-1">
+            <label id="CheckBoxGrouplabel" for="CheckBoxGroup">
+                Select your favorite gaming platforms:
+            </label>
+            <input type="checkbox" id="CheckBoxGroup" name="CheckBoxGroup" value="PS4"
+                   @(Array.IndexOf(choice.Split(','), "PS4") >= 0 ? "checked" : "") />PS4<br />
+            <input type="checkbox" id="CheckBoxGroup" name="CheckBoxGroup" value="Cell Phone"
+                   @(Array.IndexOf(choice.Split(','), "Cell Phone") >= 0 ? "checked" : "") />Phone<br />
+            <input type="checkbox" id="CheckBoxGroup" name="CheckBoxGroup" value="Nintendo DS"
+                   @(Array.IndexOf(choice.Split(','), "Nintendo DS") >= 0 ? "checked" : "") />Nintendo DS<br />
+            <input type="checkbox" id="CheckBoxGroup" name="CheckBoxGroup" value="WII"
+                   @(Array.IndexOf(choice.Split(','), "WII") >= 0 ? "checked" : "") />WII<br />
         </div>
-        <div class="row">
-            <div class="col-sm-offset-1">
-                <input type="submit" class="btn btn-primary" id="formButtom" name="formButton" value="submit" />
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-1">
+            <input type="submit" class="btn btn-primary" id="formButton" name="formButton"
+                   value="Submit" />
         </div>
+    </div>
+</form>
 
-    </form>
