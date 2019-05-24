@@ -1,68 +1,68 @@
 ﻿@{
     Layout = "~/_Layout.cshtml";
-    Page.Title = "SingleQuery";
+    Page.Title = "Single Query";
 
-    var searchArg = Request.Form["SearchArg"];
-    var theButton = Request.Form["theButton"];
+    var searcharg = Request.Form["SearchArg"];
+    var thebutton = Request.Form["FormButton"];
 
     var regionid = "";
     var description = "";
 
-    //Open a connection to the database
-    //Use the connection string name attribute value
-
+    //open a connection to the database
+    //use the connection string name attribute value
     var db = Database.Open("NWDB");
 
-    //create an sql query command to retrieve the desired data
-    //if the query command requires a parameter value, you will need to use a placeholder
-    //placeholder syntax: @n where n is 0, 1, 2, 3...
-    // you can have multiple placeholders
-    // HARD CODED STRING CANNOT BE MULTIPLE LINES
+    //create the sql query command to retreive the desired data
+    //if the query command requires a parameter value
+    //    then you will need to use a placeholder
+    //placeholder syntax is: @n where n is 0, 1, 2, ....
+    //you can have multiple placeholders
+    //HARD CODED STRING CANNOT BE OVER MULTIPLE PHYSICAL LINES!!!!!
+    var querycommand = "SELECT RegionID, RegionDescription "
+                    + "FROM Region "
+                    + "WHERE RegionID = @0";
 
-    var queryCommand = "SELECT RegionID, RegionDescription "
-                        + "FROM Region"
-                        + "WHERE RegionID = @0";
-    //Excecute your command
+    //execute your command
     //the result will be one of the following
-    //a single record
-    //a data set of 0, 1, or more records
-    //a single value
-    //youre expected results will determine how you execute your command
-        //.querySingle()
-        //.query()
-        //.queryValue()
-    //our search is by primary key therefire our expected results is a single record
-    //the query single (command string[,comma delimiter list of parameter values])
-    //order of parameter values must match the order of placeholders
-
-    var datainfo = db.QuerySingle(queryCommand, searchArg);
+    //  a) a single record
+    //  b) a data set of 0, 1 or more records
+    //  c) a single value
+    //your expected results will determine how you execute your command
+    //  a) .QuerySingle()
+    //  b) .Query()
+    //  c) .QueryValue()
+    //our search is by primary key therefore our expected results is (a) single record
+    //the .QuerySingle(command string[,comma delimiter list of parameter values])
+    //order of parameter values MUST match the order of placeholders
+    var datainfo = db.QuerySingle(querycommand, searcharg);
 }
 
 @section banner{
     <h1>Database: Single Record Query</h1>
 }
 
-<form id="theForm" method="post">
-    <div class="row">
-        <div class="col-md-6">
-            <label for="SearchArg" id="label1">Enter a region ID::</label>
-            <input type="text" id="SearchArg" name="SearchArg" value="@searchArg"
-                   placeholder="enter region ID:" />
-            <br />
-            <input type="submit" id="frombutton" name="formbutton"
-                   class="btn" value="Submit" />&nbsp; &nbsp;
-            <input type="submit" id="frombutton" name="formbutton"
-                   class="btn" value="Clear" />
-        </div>
-        <div class="col-md-6">
-            <label for="regionID" id="label2">region ID:</label>&nbsp;
-            <input type="text" id="RegionID" name="RegionID" value="@regionid"
-                   readonly="readonly"/>
-            <br />
-            <label for="Description" id="label3">Description</label>
-            <input type="text" id="Description" name="Description" value="@description"
-                   readonly="readonly"/ />
 
+    <form id="theForm" method="post">
+       
+        <div class="row">
+            <div class="col-md-6">
+                <label for="SearchArg" id="label1">Enter a Region ID:</label>
+                <input type="text" id="SearchArg" name="SearchArg" value="@searcharg"
+                       placeholder="enter region id" />
+                <br />
+                <input type="submit" id="FormButton" name="FormButton"
+                       class="btn btn-primary" value="Submit" />&nbsp;&nbsp;
+                <input type="submit" id="FormButton" name="FormButton"
+                       class="btn" value="Clear" />
+            </div>
+            <div class="col-md-6">
+                <label for="RegionID" id="label2">Region ID:</label>&nbsp;
+                <input type="text" id="RegionID" name="RegionID" value="@regionid"
+                     readonly="readonly"/>
+                <br />
+                <label for="Description" id="label3">Description:</label>
+                <input type="text" id="Description" name="Description" value="@description"
+                       readonly="readonly"/>
+            </div>
         </div>
-    </div>
-</form>
+    </form>

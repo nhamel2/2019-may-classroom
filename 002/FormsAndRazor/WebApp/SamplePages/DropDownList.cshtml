@@ -15,7 +15,7 @@
     {
         case "TEXTBOXES":
             {
-                Response.Redirect("TestBoxes.cshtml");
+                Response.Redirect("TextBoxes.cshtml");
                 break;
             }
         case "RADIOBUTTONS":
@@ -30,33 +30,31 @@
             }
         default:
             {
-                <p><span style="color:firebrick;">Make a choice of the sample you wish to use</span></p>
+                <p><span style="color:firebrick">Make a choice of the sample your wish to view.</span></p>
                 break;
             }
-
     }
 }
-
 <form id="theform" method="post">
     <div class="row">
         <div class="col-sm-offset-1">
-            <label id="label1" for="CodingSamplePage">Select the sample to view:</label> &nbsp; &nbsp;
-            @*the dropdownlist (combo box) is a set of w tags
-        the control is the select tag
-        the contents is the option tag
-        you may have select option tags, each represents a line item (li) in the control
-        the option tag has two components, value which is hidden, and a visible text string*@
+            <label id="label1" for="CodingSamplePage">Select the sample to view:</label>&nbsp;&nbsp;
+            <!-- the dropdown list (aka combobox) is a set of w tags
+         the control is the <select> tag
+         the contents is the <option> tag
+         you may have select <option> tags, each representing a lineitem
+            (li) in the control
+         the option tag has two components value (which is hidden) and
+            a visible text string-->
             <select id="CodingSamplePage" name="CodingSamplePage">
                 <option value="">select ...</option>
                 <option value="TextBoxes">TextBoxes</option>
                 <option value="RadioButtons">RadioButtons</option>
                 <option value="CheckBoxes">CheckBoxes</option>
-
-            </select>&nbsp; &nbsp;
+            </select>&nbsp;&nbsp;
             <input type="submit" class="btn btn-primary" id="formButton" name="formButton"
                    value="Submit" />
         </div>
     </div>
 </form>
-
 
