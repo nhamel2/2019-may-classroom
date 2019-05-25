@@ -41,28 +41,71 @@
     <h1>Database: Single Record Query</h1>
 }
 
+@if (IsPost)
+{
+    if (thebutton.Equals("clear"))
+    {
+        searcharg = "";
+        regionid = "";
+        description = "";
+    }
+    else
+    {
+        //validate that a value was entered
+        if (string.IsNullOrEmpty(searcharg))
+        {
+            <p><span style="color: firebrick;">enter a region id for which to search</span></p>
+            regionid = "";
+            description = "";
+        }
 
-    <form id="theForm" method="post">
-       
-        <div class="row">
-            <div class="col-md-6">
-                <label for="SearchArg" id="label1">Enter a Region ID:</label>
-                <input type="text" id="SearchArg" name="SearchArg" value="@searcharg"
-                       placeholder="enter region id" />
-                <br />
-                <input type="submit" id="FormButton" name="FormButton"
-                       class="btn btn-primary" value="Submit" />&nbsp;&nbsp;
-                <input type="submit" id="FormButton" name="FormButton"
-                       class="btn" value="Clear" />
-            </div>
-            <div class="col-md-6">
-                <label for="RegionID" id="label2">Region ID:</label>&nbsp;
-                <input type="text" id="RegionID" name="RegionID" value="@regionid"
-                     readonly="readonly"/>
-                <br />
-                <label for="Description" id="label3">Description:</label>
-                <input type="text" id="Description" name="Description" value="@description"
-                       readonly="readonly"/>
-            </div>
+
+        //check to see if sql returned any data to process
+        else
+        {
+            if (datainfo == null)
+            {
+                <p><span style="color: firebrick;"> No region found for the id: @searcharg </span></p>
+                //optionally you can reset your result output field
+                regionid = "";
+                description = "";
+            }
+            else
+            {
+                //accessing the data from your sql data output can be done
+                //via an index          xxx[n] n = column
+                //via property name     xxx.PropertyName PropertyName = column name
+                regionid = datainfo[0];
+                description = datainfo.RegionDescription;
+
+            }
+        }
+
+
+    }
+}
+
+<form id="theForm" method="post">
+
+    <div class="row">
+        <div class="col-md-6">
+            <label for="SearchArg" id="label1">Enter a Region ID:</label>
+            <input type="text" id="SearchArg" name="SearchArg" value="@searcharg"
+                   placeholder="enter region id" />
+            <br />
+            <input type="submit" id="FormButton" name="FormButton"
+                   class="btn btn-primary" value="Submit" />&nbsp;&nbsp;
+            <input type="submit" id="FormButton" name="FormButton"
+                   class="btn" value="Clear" />
         </div>
-    </form>
+        <div class="col-md-6">
+            <label for="RegionID" id="label2">Region ID:</label>&nbsp;
+            <input type="text" id="RegionID" name="RegionID" value="@regionid"
+                   readonly="readonly" />
+            <br />
+            <label for="Description" id="label3">Description:</label>
+            <input type="text" id="Description" name="Description" value="@description"
+                   readonly="readonly" />
+        </div>
+    </div>
+</form>

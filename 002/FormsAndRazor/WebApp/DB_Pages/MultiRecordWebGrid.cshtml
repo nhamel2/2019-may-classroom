@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "~/_Layout.cshtml";
+    Page.Title = "Multi Record WebGrid";
+
+    //retrieve the passed data value(s)
+    //use the .QueryString Structure of the Request
+    //Request.QueryString["passeddatalabel"]
+    //if no label specified is on the url, the result will be null
+    //data is passed as a string
+    var cid = Request.QueryString["cid"];
+
+    //test to see if you actually recieved a value
+    if(string.IsNullOrEmpty(cid))
+    {
+        Response.Redirect("MultiRecordQuery.cshtml");
+    }
+
+    var db = Database.Open("NWDB");
+    var querycommand = @"SELECT ProductID, ProductName, QuantityPerUnit, UnitPrice, Discontinued
+                         FROM Products
+                         WHERE CategoryID = @0";
+    var datainfo = db.Query(querycommand, cid);
+    var gridinstance = new WebGrid(datainfo);
+    //webgrid is an object and therfore must be instanciated (create an instance)
+    //the default constructor for webgrid need to be given the dataset
+}
+
+
+@section banner{
+    <h1>Database: Multiple Record Query</h1>
+
+    <blockquote>
+        This is the SECOND page of a two page query. This first page will load a drop
+        down list from data provided by the database. The page will pass the selected
+        value from the dropdown list to the next page, which will be responsible for
+        displaying multiple records for the selected value.
+        This page will use the webGrid object to display the product category recods. 
+        This page will use a customized webgrid.
+        On this page there will be no form.
+    </blockquote>
+}
+
+<span style="font-size:xx-large;"><strong>Database: WebGrid</strong></span>
+
+<br />
+
+@* default webgrid *@
+<div class="row">
+    <div class="col-md-offset-1">
+        <span style="font-size:xx-large;">Products for @cid</span>
+        @gridinstance.GetHtml();
+    </div>
+</div>
+
