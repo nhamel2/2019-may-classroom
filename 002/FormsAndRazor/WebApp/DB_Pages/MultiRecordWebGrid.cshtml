@@ -23,10 +23,15 @@
                          WHERE CategoryID = @0";
     var datainfo = db.Query(querycommand, cid);
 
+    var queryCategory = @"  SELECT CategoryName
+                            FROM Categories
+                            WHERE CatergoryID = @0";
+    var categoryname = db.QueryValue(queryCategory, cid);
+
     //WebGrid is an object
     //you need to create an inastance of the object
     //The "default" constructor for WebGrid needs to be given the data set
-    var gridinstance = new WebGrid(datainfo);
+    var gridinstance = new WebGrid(datainfo, rowsPerPage:5);
 
 }
 @section banner{
@@ -47,9 +52,43 @@
 <br/>
 <div class="row">
     <div class="col-md-offset-1">
-        <span style="font-size:x-large">Products for @cid</span>
+        <span style="font-size:x-large">Products for @categoryname</span>
         <!-- default webgrid-->
-        @gridinstance.GetHtml();
+        @*@gridinstance.GetHtml();*@
+
+        @* Customized webgrid *@
+        @gridinstance.GetHtml(tableStyle: "table table-borded table-striped table-hover",
+                              mode:        WebGridPagerModes.All,
+                              firstText:   "Start",
+                              lastText:    "End",
+                              columns:     gridinstance.Columns(gridinstance.Column(columnName:"ProductID", 
+                                                                                    header:     "ID", 
+                                                                                    canSort:    true),
+                                                                
+                                                                gridinstance.Column(columnName:"ProductName",
+                                                                                    header:     "product",
+                                                                                    canSort:    true),
+                                                                
+                                                                gridinstance.Column(columnName: "UnitPrice", 
+                                                                                    header:     "5",
+                                                                                    canSort:    false,
+                                                                                    format:     (item) => item.UnitPrice.ToString("0.00")),
+                                                                
+                                                                gridinstance.Column(columnName: "Discontinued", 
+                                                                                    header:     "Disc",
+                                                                                    canSort:    false,
+                                                                                    format:     @<input name="Discontinued" 
+                                                                                                        type="checkbox" 
+                                                                                                        value="@item.Discontinued" 
+                                                                                                        disabled="disabled"
+                                                                                                        @(item.Discontinued == true ? "Checked" : null)   
+                                                                                                 />),
+                                                                gridinstance.Column(header:     "",
+                                                                                    format:     @<text><a href="~/DB_Pages/WebGridDestiation.cshtml?pid=@item.ProductID" 
+                                                                                                          onclick="return confirm('Are you sure you wish to view the product details of @item.ProductName')">View</a></text>)));
+        <br />
+        <a href=""></a>
+
     </div>
 </div>
 

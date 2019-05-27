@@ -117,6 +117,8 @@
     <Content Include="DB_Pages\SingleQuery.cshtml" />
     <Content Include="DB_Pages\MultiRecordQuery.cshtml" />
     <Content Include="DB_Pages\MultiRecordWebGrid.cshtml" />
+    <Content Include="DB_Pages\WebGridDestination.cshtml" />
+    <Content Include="DB_Pages\CRUDpage.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
