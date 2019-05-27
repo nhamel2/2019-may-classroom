@@ -43,7 +43,8 @@
 
 @if (IsPost)
 {
-    if (thebutton.Equals("clear"))
+    //which button was pressed
+    if (thebutton.Equals("Clear"))
     {
         searcharg = "";
         regionid = "";
@@ -51,37 +52,34 @@
     }
     else
     {
-        //validate that a value was entered
+        //validate that a value was supplied to search for
         if (string.IsNullOrEmpty(searcharg))
         {
-            <p><span style="color: firebrick;">enter a region id for which to search</span></p>
+            <p><span style="color:dodgerblue">Enter a region id for which to search.</span></p>
+            //optionally, consider empting your result output fields
             regionid = "";
             description = "";
         }
-
-
-        //check to see if sql returned any data to process
+        //test if sql returned any data for processing
+        // QueryString(), you will check for null
+        // Query(), you will check dataset.Count() == 0
+        else if (datainfo == null)
+        {
+            <p><span style="color:dodgerblue">No region found for the id: @searcharg</span></p>
+            //optionally, consider empting your result output fields
+            regionid = "";
+            description = "";
+        }
         else
         {
-            if (datainfo == null)
-            {
-                <p><span style="color: firebrick;"> No region found for the id: @searcharg </span></p>
-                //optionally you can reset your result output field
-                regionid = "";
-                description = "";
-            }
-            else
-            {
-                //accessing the data from your sql data output can be done
-                //via an index          xxx[n] n = column
-                //via property name     xxx.PropertyName PropertyName = column name
-                regionid = datainfo[0];
-                description = datainfo.RegionDescription;
-
-            }
+            //accessing the data from your sql data output can be done
+            //   a) via an index   xxxx[n] where n = 0, 1, 2, etc.
+            //   b) via property name     xxxx.PropertyName
+            //      (the PropertyName is the column title string for
+            //        your query)
+            regionid = datainfo[0].ToString();
+            description = datainfo.RegionDescription;
         }
-
-
     }
 }
 

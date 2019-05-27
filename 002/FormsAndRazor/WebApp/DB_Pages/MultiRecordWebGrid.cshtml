@@ -2,53 +2,55 @@
     Layout = "~/_Layout.cshtml";
     Page.Title = "Multi Record WebGrid";
 
-    //retrieve the passed data value(s)
-    //use the .QueryString Structure of the Request
+    //retrieve the passed data value(s);
+    //use the .QueryString structure of the Request 
+    //syntax
     //Request.QueryString["passeddatalabel"]
-    //if no label specified is on the url, the result will be null
-    //data is passed as a string
+    //if not label specified is on the url, the result will be null
+    //data is pass as a string
     var cid = Request.QueryString["cid"];
 
-    //test to see if you actually recieved a value
-    if(string.IsNullOrEmpty(cid))
+    //test to see if you actually received a value
+    if (string.IsNullOrEmpty(cid))
     {
         Response.Redirect("MultiRecordQuery.cshtml");
     }
 
     var db = Database.Open("NWDB");
-    var querycommand = @"SELECT ProductID, ProductName, QuantityPerUnit, UnitPrice, Discontinued
-                         FROM Products
+    var querycommand = @"SELECT ProductID, ProductName, QuantityPerUnit, 
+                         UnitPrice, Discontinued
+                         FROM Products 
                          WHERE CategoryID = @0";
     var datainfo = db.Query(querycommand, cid);
+
+    //WebGrid is an object
+    //you need to create an inastance of the object
+    //The "default" constructor for WebGrid needs to be given the data set
     var gridinstance = new WebGrid(datainfo);
-    //webgrid is an object and therfore must be instanciated (create an instance)
-    //the default constructor for webgrid need to be given the dataset
+
 }
-
-
 @section banner{
-    <h1>Database: Multiple Record Query</h1>
+    <h1>Database: Multiple Record WebGrid</h1>
 
     <blockquote>
-        This is the SECOND page of a two page query. This first page will load a drop
-        down list from data provided by the database. The page will pass the selected
-        value from the dropdown list to the next page, which will be responsible for
-        displaying multiple records for the selected value.
-        This page will use the webGrid object to display the product category recods. 
-        This page will use a customized webgrid.
+        This is the second page of a two page query technique. This first page
+        will load a dropdownlist from data provided by the database. The page
+        will pass the selected value from the dropdownlist to the next page
+        which will be responsible for displaying multiple record for the
+        selected value. This page will use the WebGrid object to display the
+         product category records. This page will use a customized WebGrid.
         On this page there will be no form.
     </blockquote>
 }
 
-<span style="font-size:xx-large;"><strong>Database: WebGrid</strong></span>
-
-<br />
-
-@* default webgrid *@
+<span style="font-size:xx-large"><strong>Database: WebGrid</strong></span>
+<br/>
 <div class="row">
     <div class="col-md-offset-1">
-        <span style="font-size:xx-large;">Products for @cid</span>
+        <span style="font-size:x-large">Products for @cid</span>
+        <!-- default webgrid-->
         @gridinstance.GetHtml();
     </div>
 </div>
+
 

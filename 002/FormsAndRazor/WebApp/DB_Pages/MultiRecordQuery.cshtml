@@ -1,62 +1,63 @@
 ﻿@{
-    //This block of code is "global" which means it will always be loaded
+    //any variable within the opening codeing block is global to the
+    //  page
+
     Layout = "~/_Layout.cshtml";
-    Page.Title = "Multi Query";
+    Page.Title = "Multi Record Query";
 
     var db = Database.Open("NWDB");
-    var querycomand = @"SELECT CategoryID, CategoryName
-                FROM Categories
-                ORDER BY CategoryName";
-    var datainfo = db.Query(querycomand);
+    var querycommand = @"SELECT CategoryID, CategoryName
+                 FROM Categories
+                 ORDER BY CategoryName";
+    var datainfo = db.Query(querycommand);
 }
 
 @section banner{
     <h1>Database: Multiple Record Query</h1>
 
     <blockquote>
-        This is the frist page of a two page query. This first page will load a drop
-        down list from data provided by the database. The page will pass the selected
-        value from the dropdown list to the next page, which will be responsible for
-        displaying multiple records for the selected value.
+        This is the first page of a two page query technique. This first page
+        will load a dropdownlist from data provided by the database. The page
+        will pass the selected value from the dropdownlist to the next page
+        which will be responsible for displaying multiple record for the
+        selected value.
     </blockquote>
 }
 
 @if (IsPost)
 {
+    //any variable within the IsPost coding block dies at the end
+    //   of the coding block
     var choice = Request.Form["CategoryList"];
+    //did the user actually make a category selection??
     if (choice.Equals("0"))
     {
-        //validate
-        <p><span style="color: firebrick;">Select a category for which to search products:</span></p>
+        <p><span style="color:dodgerblue">Select a category for which to search products.</span></p>
     }
     else
     {
         //pass data to another page
-        //Response.Redirect("relative page name"[?label=value[&label=value]]) [] not necessary
+        //use the Response structure with the .Redirect() method
+        //syntax
+        //Response.Redirect("relative page name[?label=value[&label=value]]")
         Response.Redirect("MultiRecordWebGrid.cshtml?cid=" + choice);
-
     }
 }
 
-<form id="theform" method="post">
-    <div class="col-md-offest-3">
+
+<form id="theForm" method="post">
+    <div class="col-md-offset-3">
         <label for="CategoryList" id="CategoryListLabel">
             Select the category products to view:
-        </label>
-        &nbsp;
-
+        </label>&nbsp;
         <select id="CategoryList" name="CategoryList">
             <option value="0">select ...</option>
             @foreach (var rowitem in datainfo)
             {
                 <option value="@rowitem.CategoryID">@rowitem.CategoryName</option>
             }
-        </select>
-
+        </select>&nbsp;
         <input type="submit" id="FormButton" name="FormButton"
                class="btn btn-primary" value="Submit" />
-        &nbsp;&nbsp;
-        <input type="submit" id="FormButton" name="FormButton"
-               class="btn" value="Clear" />
     </div>
 </form>
