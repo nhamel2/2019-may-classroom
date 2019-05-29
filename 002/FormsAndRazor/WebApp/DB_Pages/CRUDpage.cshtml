@@ -12,16 +12,41 @@
     var reorderLevel = "";
     var thebutton = "";
 
+    var db = Database.Open("NWDB");
+    var supplierquery = @"  SELECT SupplierID, CompanyName
+        FROM Suppliers
+        ORDER BY CompanyName";
+    var categoryquery = @"  SELECT CategoryID, CategoryName
+        FROM Categories
+        ORDER BY CategoryName";
+    //execute query into usuable variables
+    var supplierlist = db.Query(supplierquery);
+    var categorylist = db.Query(categoryquery);
+
+    //validator controls
+    Validation.Add("ProductName", Validator.Required("Product Name is required"),
+                                    Validator.StringLength(10, 1, "Product Name is limited to 10 characters"));
+    Validation.Add("QuantityPerUnit", Validator.StringLength(20, 0, "Quantity is limited to 20 per unit"));
+    Validation.Add("UnitPrice", Validator.Range(0.0, double.MaxValue, "Price must be dollar amount 0.00 or greater"));
+    Validation.Add("UnitsInStock", Validator.Range(0, Int16.MaxValue, "Units in Stock must be 0 or greater"));
+    Validation.Add("UnitsOnOrder", Validator.Range(0, Int16.MaxValue, "Units on Order must be 0 or greater"));
+    Validation.Add("ReorderLevel", Validator.Range(0, Int16.MaxValue, "Reorder Level must be 0 or greater"));
+
+
     if (IsPost)
+    //obtain two lists, supplier list and category list
     {
+
+
         if (thebutton.Equals("Clear"))
         {
             <p class="text-center">You cleaned the current input</p>
         }
         else
         {
+
             productName = Request.Form["ProductName"];
-            supplierID = Request.Form["SupplierID"];
+            supplierID = Request.Form["SupplierList"];
             categoryID = Request.Form["CategoryID"];
             quantityPerUnit = Request.Form["QuantityPerUnit"];
             unitPrice = Request.Form["UnitPrice"];
@@ -30,25 +55,34 @@
             reorderLevel = Request.Form["ReorderLevel"];
             thebutton = Request.Form["theButton"];
 
-            try
+            if (Validation.IsValid())
             {
-                var db = Database.Open("NWDB");
-                var insertcommand = @"  INSERT INTO Products (ProductName, SupplierID, CategoryId, QuantityPerUntit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued)
-                                VALUES(@0, @1, @2, @3, @4, @5, @6, @7, @8, false)";
-                db.Execute(insertcommand, productName,
-                                                      string.IsNullOrEmpty(supplierID) ? null : supplierID,
-                                                      string.IsNullOrEmpty(categoryID) ? null : categoryID,
-                                                      string.IsNullOrEmpty(quantityPerUnit) ? null : quantityPerUnit,
-                                                      string.IsNullOrEmpty(unitPrice) ? null : unitPrice,
-                                                      string.IsNullOrEmpty(unitsInStock) ? null : unitsInStock,
-                                                      string.IsNullOrEmpty(unitsOnOrder) ? null : unitsOnOrder,
-                                                      string.IsNullOrEmpty(reorderLevel) ? null : reorderLevel);
-                
-                <p class="text-center"><span style="color:aqua">Product has been added</span></p>
-            }
-            catch (Exception ex)
-            {
-                <p class="text-center"><span style="color:firebrick">@ex.Message</span></p>
+                if (supplierID.Equals(0))
+                {
+                    <p class="text-center"><span style="color:firebrick">Select a supplier for the product</span></p>
+                }
+
+
+                try
+                {
+                    db = Database.Open("NWDB");
+                    var insertcommand = @"  INSERT INTO Products (ProductName, SupplierID, CategoryId, QuantityPerUntit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued)
+                        VALUES(@0, @1, @2, @3, @4, @5, @6, @7, @8, false)";
+                    db.Execute(insertcommand, productName,
+                                                          string.IsNullOrEmpty(supplierID) ? null : supplierID,
+                                                                  string.IsNullOrEmpty(categoryID) ? null : categoryID,
+                                                                  string.IsNullOrEmpty(quantityPerUnit) ? null : quantityPerUnit,
+                                                                  string.IsNullOrEmpty(unitPrice) ? null : unitPrice,
+                                                                  string.IsNullOrEmpty(unitsInStock) ? null : unitsInStock,
+                                                                  string.IsNullOrEmpty(unitsOnOrder) ? null : unitsOnOrder,
+                                                                  string.IsNullOrEmpty(reorderLevel) ? null : reorderLevel);
+
+                    <p class="text-center"><span style="color:aqua">Product has been added</span></p>
+                }
+                catch (Exception ex)
+                {
+                    <p class="text-center"><span style="color:firebrick">@ex.Message</span></p>
+                }
             }
         }
     }
@@ -76,12 +110,53 @@
         </div>
         <div class="col-md-6 text-left">
             <input type="text" id="ProductName" name="ProductName" value="@productName" /><br />
-            <input type="text" id="SupplierID" name="SupplierID" value="@supplierID" /><br />
-            <input type="text" id="CategoryID" name="CategoryID" value="@categoryID" /><br />
-            <input type="text" id="QuantityPerUnit" name="QuantityPerUnit" value="@quantityPerUnit" /><br />
-            <input type="text" id="UnitPrice" name="UnitPrice" value="@unitPrice" /><br />
-            <input type="text" id="UnitsInStock" name="UnitsInStock" value="@unitsInStock" /><br />
-            <input type="text" id="UnitsOnOrder" name="UnitsOnOrder" value="@unitsOnOrder" /><br />
+
+            <select id="SupplerList" name="SupplierList">
+                <option value="0">select supplier...</option>
+                @foreach (var item in supplierlist)
+                {
+
+
+                    //local string       integer value in collection
+                    if (supplierID == item.SupplierID.ToString())
+                    {
+                        <option value="@item.SupplierID" selected>@item.CompanyName</option>
+                    }
+                    else
+                    {
+                        <option value="@item.SupplierID">@item.CompanyName</option>
+                    }
+
+                }
+            </select><br />
+
+            <select id="CategoryList" name="CategoryList">
+                <option value="0">select category...</option>
+                @foreach (var item in categorylist)
+                {
+
+
+                    //local string       integer value in collection
+                    if (categoryID == item.CategoryID.ToString())
+                    {
+                        <option value="@item.CategoryID" selected>@item.CategoryName</option>
+                    }
+                    else
+                    {
+                        <option value="@item.CategoryID">@item.CategoryName</option>
+                    }
+
+                }
+            </select><br />
+            <br />
+            <input type="text" id="QuantityPerUnit" name="QuantityPerUnit" value="@quantityPerUnit" />
+            <br />
+            <input type="text" id="UnitPrice" name="UnitPrice" value="@unitPrice" />
+            <br />
+            <input type="text" id="UnitsInStock" name="UnitsInStock" value="@unitsInStock" />
+            <br />
+            <input type="text" id="UnitsOnOrder" name="UnitsOnOrder" value="@unitsOnOrder" />
+            <br />
             <input type="text" id="ReorderLevel" name="ReorderLevel" value="@reorderLevel" />
             <br />
 
