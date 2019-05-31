@@ -54,10 +54,10 @@
     <div class="col-md-offset-1">
         <span style="font-size:x-large">Products for @categoryname</span>
         <!-- default webgrid-->
-        @*@gridinstance.GetHtml();*@
+        @gridinstance.GetHtml();
 
         @* Customized webgrid *@
-        @gridinstance.GetHtml(tableStyle: "table table-borded table-striped table-hover",
+        @*@gridinstance.GetHtml(tableStyle: "table table-borded table-striped table-hover",
                               mode:        WebGridPagerModes.All,
                               firstText:   "Start",
                               lastText:    "End",
@@ -87,7 +87,7 @@
                                                                                     format:     @<text><a href="~/DB_Pages/WebGridDestiation.cshtml?pid=@item.ProductID" 
                                                                                                           onclick="return confirm('Are you sure you wish to view the product details of @item.ProductName')">View</a></text>)));
         <br />
-        <a href=""></a>
+        <a href=""></a>*@
 
     </div>
 </div>
