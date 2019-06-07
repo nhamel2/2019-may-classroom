@@ -9,6 +9,7 @@
     
       <siteMapNode url="" title="Samples" description="" >
         <siteMapNode url="~/SamplePages.aspx/Hello.aspx" title="Hello"  description="" />
+        <siteMapNode url="~/SamplePages.aspx/BasicControls.aspx" title="BasicControls"  description="" />
       </siteMapNode>
     
   </siteMapNode>
