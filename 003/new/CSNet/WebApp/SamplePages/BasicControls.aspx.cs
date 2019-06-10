@@ -107,7 +107,35 @@ namespace WebApp.SamplePages
 
         protected void LinkButtonSubmit_Click(object sender, EventArgs e)
         {
-            //enter your event code
+            //enter your event code (Same as above just backwards)
+
+            //test for the prompt
+            //prompt is at index 0
+            if(CollectionList.SelectedIndex == 0)
+            {
+                MessageLabel.Text = "Select a Course";
+            }
+            else
+            {
+                string numberchoice = CollectionList.SelectedValue;
+                TextBoxNumberChoice.Text = numberchoice;
+
+                RadioButtonListChoice.SelectedValue = numberchoice;
+                //use this value to set the checkbox
+                if (numberchoice.Equals("2") || numberchoice.Equals("4"))
+                {
+                    CheckBoxChoice.Checked = true;
+                }
+                else
+                {
+                    CheckBoxChoice.Checked = false;
+                }
+                DisplayReadOnly.Text = CollectionList.SelectedItem.Text
+                + " at index " + CollectionList.SelectedIndex
+                + " have a value of " + CollectionList.SelectedValue;
+
+            }
+
         }
 
 
