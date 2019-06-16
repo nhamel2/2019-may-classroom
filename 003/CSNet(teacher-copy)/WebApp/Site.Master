@@ -64,17 +64,13 @@
                         To use this menu file you will need
                         a) asp:Menu control (under Toolbox/Navigation)
                         b) asp:SiteMapDataSource control (under Toolbox/Data)--%>
-                    <asp:Menu 
-                         ID="BasicASPMenu" 
-                         runat="server"
-                         DataSourceID="SiteNav" 
-                         Orientation="Horizontal"
+                    <asp:Menu ID="BasicASPMenu" runat="server"
+                         DataSourceID="SiteNav" Orientation="Horizontal"
                          StaticDisplayLevels="1"
                          StaticMenuStyle-CssClass="nav navbar-nav"
                          StaticSelectedStyle-CssClass="active"
                          DynamicMenuStyle-CssClass="dropdown-menu"
-                         IncludeStyleBlock="false" 
-                         EnableTheming="false"
+                         IncludeStyleBlock="false" EnableTheming="false"
                          EnableViewState="false">
                     </asp:Menu>
 

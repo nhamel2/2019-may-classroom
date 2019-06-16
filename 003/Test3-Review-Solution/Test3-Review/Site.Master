@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApp.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Test3_Review.SiteMaster" %>
 
 <!DOCTYPE html>
 
@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> </title>
+    <title><%: Page.Title %> - My ASP.NET Application</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -46,24 +46,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">Branding Text</a>
+                    <a class="navbar-brand" runat="server" href="~/">Application name</a>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <%--this is the default supplied menu when the web application
-                        is first created
-
-                    <ul class="nav navbar-nav">
+<%--                <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Home</a></li>
                         <li><a runat="server" href="~/About">About</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
                     </ul>--%>
 
-                    <%-- You can replace the default menu with your own
-                        menu file: web.sitemap
-                        
-                        To use this menu file you will need
-                        a) asp:Menu control (under Toolbox/Navigation)
-                        b) asp:SiteMapDataSource control (under Toolbox/Data)--%>
                     <asp:Menu 
                          ID="BasicASPMenu" 
                          runat="server"
@@ -78,18 +69,13 @@
                          EnableViewState="false">
                     </asp:Menu>
 
-                    <%-- this control via web.config will by default look for a
-                         menu file called web.sitemap
-                        the ShowStartingNode represses the first siteMapNode--%>
-                    <asp:SiteMapDataSource ID="SiteNav" runat="server"
-                         ShowStartingNode="false"/>
+                    <asp:SiteMapDataSource ID="SiteNav" runat="server" ShowStartingNode="false"/>
                 </div>
             </div>
         </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-
             <hr />
             <footer>
                 <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>

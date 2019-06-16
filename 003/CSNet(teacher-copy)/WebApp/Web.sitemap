@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="" title=""  description="points to the root menu">
+    <!--within the top siteMapNode is the whole menu-->
+    <!--a menu item is a siteMapNode
+          a) self closing
+          b) url is the relative address to the page
+          c) title is the menu item text
+          d) description is documentation optional
+          e) in this file you MUST include the file extension-->
+    
+    <siteMapNode url="~/Default.aspx" title="Home"  description="web site landing page" />
+    <siteMapNode url="~/About.aspx" title="About"  description="" />
+    <siteMapNode url="~/Contact.aspx" title="Contact"  description="" />
+    <!--Dropdown submenu
+        create a siteMapNode with SEPARATE open and close tags-->
+    <siteMapNode url="" title="Samples" description="">
+      <!-- within a set of open/close siteMapNode tags is your drop down sub menu items-->
+       <siteMapNode url="~/SamplePages/Hello.aspx" title="Hello"  description="" />
+       <siteMapNode url="~/SamplePages/BasicControls.aspx" title="Basic Controls"  description="" />
+      <siteMapNode url="~/SamplePages/JobApplication.aspx" title="Controls and Events"  description="" />
+      <siteMapNode url="~/SamplePages/ContestEntry.aspx" title="Validation and GridView"  description="" />
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>
