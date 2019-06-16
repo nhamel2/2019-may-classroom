@@ -1,0 +1,2 @@
+Install-Package NuGetPowerTools
+Enable-PackageRestore

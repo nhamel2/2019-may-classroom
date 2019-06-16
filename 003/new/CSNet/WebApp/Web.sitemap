@@ -18,6 +18,8 @@
       <!-- within a set of open/close siteMapNode tags is your drop down sub menu items-->
        <siteMapNode url="~/SamplePages/Hello.aspx" title="Hello"  description="" />
        <siteMapNode url="~/SamplePages/BasicControls.aspx" title="Basic Controls"  description="" />
+      <siteMapNode url="~/SamplePages/JobApplication.aspx" title="Job Application"  description="" />
+      <siteMapNode url="~/SamplePages/ContestEntry.aspx" title="Controls and Events"  description="" />
     </siteMapNode>
   </siteMapNode>
 </siteMap>
