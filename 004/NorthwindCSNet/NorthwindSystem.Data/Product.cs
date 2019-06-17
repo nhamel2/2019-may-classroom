@@ -45,7 +45,7 @@ namespace NorthwindSystem.Data
             }
             set
             {
-                if(string.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
                     _QuantityPerUnit = null;
                 }
@@ -63,6 +63,15 @@ namespace NorthwindSystem.Data
         public bool Discontinued { get; set; }
 
         //readonly display fields to be used with your application, these property are NOT mapped to ANY sql attribute
+        //Use the [NotMapped] annotation
+        [NotMapped]
+        public string ProductDescription
+        {
+            get
+            {
+                return ProductName + "(" + ProductID + ")";
+            }
+        }
 
 
     }
