@@ -17,5 +17,15 @@ namespace NorthwindSystem.DAL
 
     internal class NorthwindSystemContext:DBContext
     {
+        //the constructor will pass to the inherited class DbContext to you r web string connection name
+        public NorthwindSystemContext():base("NWDB")
+        {
+
+        }
+
+
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Product> Categories { get; set; }
+        public DbSet<Product> Supplier { get; set; }
     }
 }

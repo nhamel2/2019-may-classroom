@@ -24,19 +24,27 @@ namespace NorthwindSystem.Data
         //if property name = sql attribute, order of properties does NOT matter
         //sql datatypes do NOT allow match C#, check for the correct C# datatype to match the sql datatype
         //      https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql-server-data-type-mappings
+        //Some properties will require annotations
 
         //primarykey
         //[key] <-- default sql identity pkey field
-        //[key, DatabaseGenerated(DatabaseGenerated.None)] <-- none identity pkey
+        //[key, DatabaseGenerated(DatabaseGeneratedOption.None)] <-- none identity pkey
         //[key, Column(Order=1)] [key, Column(Order=2)]... <-- compound key
 
         //products is a sql identity pkey field
         [Key]
         public int ProductID { get; set; }
 
+
+        //entity properties can have their own validation
+        [Required(ErrorMessage = "Product name is required")]
+        [StringLength(160, ErrorMessage = "Product is limited to 160 characters")]
         public string ProductName { get; set; }
+
         public int? SupplierID { get; set; } //? = null
-        public int? CategoryID { get; set; }
+        public int? CategoryID { get; set; } //? = null
+
+        [StringLength(25, ErrorMessage = "Product is limited to 25 characters")]
         public string QuantityPerUnit
         {
             get
@@ -55,11 +63,18 @@ namespace NorthwindSystem.Data
                 }
             }
         }
-
+        [Range(0.00, double.MaxValue, ErrorMessage ="Unit price must be 0.00 or greater")]
         public decimal? UnitPrice { get; set; }
-        public Int16? UnitsInOrder { get; set; }
+
+        [Range(0, Int16.MaxValue, ErrorMessage = "units in Stock must be 0 or greater")]
+        public Int16? UnitsInStock { get; set; }
+
+        [Range(0, Int16.MaxValue, ErrorMessage = "Units On Order must be 0 or greater")]
         public Int16? UnitsOnOrder { get; set; }
+
+        [Range(0, Int16.MaxValue, ErrorMessage = "Reorder Level must be 0 or greater")]
         public Int16? ReorderLevel { get; set; }
+
         public bool Discontinued { get; set; }
 
         //readonly display fields to be used with your application, these property are NOT mapped to ANY sql attribute
