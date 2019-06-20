@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-#region Addtional namespaces
+#region Additional Namespaces
 using System.Data.Entity;
+using NorthwindSystem.Data;
 #endregion
 
 namespace NorthwindSystem.DAL
@@ -15,7 +16,7 @@ namespace NorthwindSystem.DAL
     //syntax:
     //currentclassname:inheritedclassname
 
-    internal class NorthwindSystemContext:DBContext
+    internal class NorthwindSystemContext:DbContext
     {
         //the constructor will pass to the inherited class DbContext to you r web string connection name
         public NorthwindSystemContext():base("NWDB")
@@ -23,6 +24,11 @@ namespace NorthwindSystem.DAL
 
         }
 
+        //setup the data collection set for each entity in your application
+        //each DbSet<T> will hold the data transfered for that particular
+        //    entity class
+        //each DbSet<T> definition is a property of this context class
+        //course standard: DbSet<T> will be plural
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Product> Categories { get; set; }
