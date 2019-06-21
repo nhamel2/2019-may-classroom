@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NorthwindSystem.Data")]
+[assembly: AssemblyTitle("NorthwindSystem")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NorthwindSystem.Data")]
+[assembly: AssemblyProduct("NorthwindSystem")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("6a624b36-132d-41a2-a2c6-dc156bc65071")]
+[assembly: Guid("9ade41df-2793-440a-83aa-c21a61aaeedb")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -4,28 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
+#region Additional Namespaces
+using NorthwindSystem.Data;
+using NorthwindSystem.DAL;
+#endregion
 
 namespace NorthwindSystem.BLL
 {
-    public class ProductController
+    public class SupplierController
     {
-        //Entity framework extension method will retrieve all records for DbSet<T>
-        public List<Product> Product_List()
+        public List<Supplier> Supplier_List()
         {
             using (var context = new NorthwindSystemContext())
             {
-                //.ToList() is required
-                return context.Products.ToList();
-            }
-        }
-        public Product Product_FindByID(int productid)
-        {
-            using (var context = new NorthwindSystemContext())
-            {
-                return context.Products.Find(productid);
+                return context.Suppliers.ToList();
             }
         }
 
+        public Supplier Supplier_FindByID(int supplierid)
+        {
+            using (var context = new NorthwindSystemContext())
+            {
+                return context.Suppliers.Find(supplierid);
+            }
+        }
     }
 }
