@@ -11,18 +11,14 @@ using NorthwindSystem.Data;
 
 namespace NorthwindSystem.DAL
 {
-    //we wish to restrict public access to this class
-    //    to classes within this project
-    //the access type will be internal
+    //restrict public access to this class to other classes in Proj (internal)
+    //this class must inherit entity framework abilities (another class)
+    //syntax:
+    //currentclassname:inheritedclassname
 
-    //this class needs to inherit the EntityFramework abilities
-    //for a class to obtain the abilities of othe classes, you
-    //   uses the OOP technique of inheritence
-    //syntax for inheriting a class:    yourclassname:inheritedclassname
     internal class NorthwindSystemContext:DbContext
     {
-        //the constructor will pass to the inherited class DbContext
-        //    your web connection string name
+        //the constructor will pass to the inherited class DbContext to you r web string connection name
         public NorthwindSystemContext():base("NWDB")
         {
 
@@ -35,8 +31,7 @@ namespace NorthwindSystem.DAL
         //course standard: DbSet<T> will be plural
 
         public DbSet<Product> Products { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Supplier> Suppliers { get; set; }
-
+        public DbSet<Product> Categories { get; set; }
+        public DbSet<Product> Supplier { get; set; }
     }
 }

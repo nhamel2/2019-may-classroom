@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-#region Additional Namespaces
+#region Addtional Namespaces
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 #endregion
@@ -19,6 +19,6 @@ namespace NorthwindSystem.Data
         public string CategoryName { get; set; }
         public string Description { get; set; }
         public byte[] Picture { get; set; }
-        public string PictureMimeType { get; set; }
+        public string PicureMimeType { get; set; }
     }
 }
