@@ -19,5 +19,7 @@
         <friendlyUrls:ViewSwitcher runat="server" />
     </div>
     </form>
+    
 </body>
+
 </html>

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 #region Additional Namespaces
 using NorthwindSystem.Data;
 using NorthwindSystem.DAL;
+using System.Data.SqlClient;
 #endregion
 
 namespace NorthwindSystem.BLL
@@ -26,6 +27,17 @@ namespace NorthwindSystem.BLL
             using (var context = new NorthwindSystemContext())
             {
                 return context.Suppliers.Find(supplierid);
+            }
+        }
+
+        public List<Supplier> Suppliers_GetCategories(int suppilerid)
+        {
+            using (var context = new NorthwindSystemContext())
+            {
+                IEnumerable<Supplier> results =
+                    context.Database.SqlQuery<Supplier>("Suppliers_GetCategories @SupplierID",
+                                    new SqlParameter("SupplierID", suppilerid));
+                return results.ToList();
             }
         }
     }
