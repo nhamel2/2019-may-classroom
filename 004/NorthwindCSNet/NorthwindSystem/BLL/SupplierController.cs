@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 #region Additional Namespaces
 using NorthwindSystem.Data;
 using NorthwindSystem.DAL;
+using NorthwindSystem.Data.Views;
 using System.Data.SqlClient;
 #endregion
 
@@ -30,12 +31,12 @@ namespace NorthwindSystem.BLL
             }
         }
 
-        public List<Supplier> Suppliers_GetCategories(int suppilerid)
+        public List<SupplierCategories> Suppliers_GetCategories(int suppilerid)
         {
             using (var context = new NorthwindSystemContext())
             {
-                IEnumerable<Supplier> results =
-                    context.Database.SqlQuery<Supplier>("Suppliers_GetCategories @SupplierID",
+                IEnumerable<SupplierCategories> results =
+                    context.Database.SqlQuery<SupplierCategories>("Suppliers_GetCategories @SupplierID",
                                     new SqlParameter("SupplierID", suppilerid));
                 return results.ToList();
             }

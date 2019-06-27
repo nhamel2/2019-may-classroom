@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %> Client Server Demos</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -14,7 +14,7 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
+    <link href="Content/myTabsSheet.css" rel="stylesheet" />
 </head>
 <body>
     <form runat="server">
@@ -55,10 +55,9 @@
                         <li><a runat="server" href="~/Contact">Contact</a></li>
                         <li><a runat="server" href="~/SamplePages/SimpleQuery">Simple Query</a></li>
                         <li><a runat="server" href="~/SamplePages/FilterQuery">Filter Query</a></li>
-                        <li><a runat="server" href="~/SamplePages/FilterSearchs">Filter Search</a></li>
-                        <li><a runat="server" href="~/SamplePages/ODSQuery">ODS Query</a></li>
+                         <li><a runat="server" href="~/SamplePages/FilterSearches">Filter Searches</a></li>
                     </ul>
-                </div>
+                </div> 
             </div>
         </div>
         <div class="container body-content">
@@ -71,6 +70,5 @@
         </div>
 
     </form>
-    <link href="Content/myTabsSheet.css" rel="stylesheet" />
 </body>
 </html>

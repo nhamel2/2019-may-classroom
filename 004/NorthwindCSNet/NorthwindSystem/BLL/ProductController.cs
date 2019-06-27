@@ -10,15 +10,13 @@ using System.Threading.Tasks;
 using NorthwindSystem.Data;
 using NorthwindSystem.DAL;
 using System.Data.SqlClient;
-using System.ComponentModel; //expose items to ODS to configure wizard
 #endregion
 
 namespace NorthwindSystem.BLL
 {
-    [DataObject]
-
     public class ProductController
     {
+
         //EntityFramework extension method will retreive all 
         //records for the DbSet<T>
         public List<Product> Product_List()
@@ -46,9 +44,6 @@ namespace NorthwindSystem.BLL
         //out of System.Data.SqlClient, use the SqlQuery<T>() method to
         //   search for data that is NOT a) the entire list or b) by the primary
         //   key field
-
-        //Expose method to ods wizard
-        [DataObjectMethod(DataObjectMethodType.Select,false)]
         public List<Product> Product_FindByName(string productname)
         {
             using (var context = new NorthwindSystemContext())
@@ -71,8 +66,6 @@ namespace NorthwindSystem.BLL
                 return results.ToList();
             }
         }
-
-
         public List<Product> Products_GetByPartialProductName(string partialname)
         {
             using (var context = new NorthwindSystemContext())
@@ -137,6 +130,5 @@ namespace NorthwindSystem.BLL
                 return results.ToList();
             }
         }
-
     }
 }
