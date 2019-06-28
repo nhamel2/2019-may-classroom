@@ -10,16 +10,18 @@ using System.Threading.Tasks;
 using NorthwindSystem.Data;
 using NorthwindSystem.DAL;
 using System.Data.SqlClient;
+using System.ComponentModel; //to expose items for the ODS configuring Wizard
 #endregion
 
 namespace NorthwindSystem.BLL
 {
+    //expose the class to the ODS wizard
+    [DataObject]
     public class ProductController
     {
 
         //EntityFramework extension method will retreive all 
         //records for the DbSet<T>
-        #region Query
         public List<Product> Product_List()
         {
             using (var context = new NorthwindSystemContext())
@@ -45,6 +47,9 @@ namespace NorthwindSystem.BLL
         //out of System.Data.SqlClient, use the SqlQuery<T>() method to
         //   search for data that is NOT a) the entire list or b) by the primary
         //   key field
+
+        //expose a method to the ODS wizard
+        [DataObjectMethod(DataObjectMethodType.Select,false)]
         public List<Product> Product_FindByName(string productname)
         {
             using (var context = new NorthwindSystemContext())
@@ -131,37 +136,5 @@ namespace NorthwindSystem.BLL
                 return results.ToList();
             }
         }
-        #endregion
     }
-    #region add,update,delete
-    
-    public int Product_Add(Product item)
-    {
-        using (var context = new NorthwindSystemContext())
-        {
-            context.Products.Add(item);
-            return = ProductID;
-        }
-    }
-
-    public int Product_Update(Product item)
-    {
-        using (var context = new NorthwindSystemContext())
-        {
-            context.Entry(item).State.Modify;
-        }
-    }
-
-    public int Product_delete(int productid)
-    {
-        using (var context = new NorthwindSystemContext())
-        {
-            var existing = context.Products.Find(productid);
-            context.Products.Remove(existing);
-            return = context.SaveChanges;
-
-        }
-    }
-
-    #endregion
 }
